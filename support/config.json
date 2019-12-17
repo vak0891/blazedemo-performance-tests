@@ -1,0 +1,12 @@
+{
+  "out": ["influxdb"],
+  "collectors": {
+    "influxdb": {
+      "addr": "https://104.196.16.20:8086",
+      "db": "k6",
+      "username": "admin",
+      "password": "xLB93vbRA6ov7TNV",
+      "insecure": true
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "out": ["influxdb"],
+  "collectors": {
+    "influxdb": {
+      "addr": "http://localhost:8086",
+      "db": "k6"
+    }
+  }
+}

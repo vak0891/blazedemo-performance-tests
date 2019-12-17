@@ -1,0 +1,43 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10-browsers
+      
+    steps:
+      - checkout
+      - run:
+          name: Install k6
+          command: |
+            if [[ ! -f k6 ]]; then
+              curl -O -L https://github.com/loadimpact/k6/releases/download/v0.25.0/k6-v0.25.0-linux64.tar.gz;
+              tar -xvzf k6-v0.25.0-linux64.tar.gz;
+              mv k6-v0.25.0-linux64/k6 ~/k6;
+              pwd;
+              ls -a;
+            fi
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Yarn install
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Run Test
+          command: yarn test
+          
+workflows:
+  version: 2
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
