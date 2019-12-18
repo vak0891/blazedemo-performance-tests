@@ -2,7 +2,7 @@
   "name": "poc-k6",
   "version": "1.0.0",
   "scripts": {
-    "test": "~/k6 run index.js --config support/config.json",
+    "test": "~/k6 run index.js --config support/config-local.json",
     "test-local": "~/k6 run index.js --config support/config-local.json",
     "lint": "eslint '**/*.{js,jsx}' --quiet",
     "lint-fix": "eslint */*.js --fix"
